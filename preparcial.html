@@ -17,7 +17,7 @@
 
         /* Estilo del encabezado */
         h1 {
-            color: #e63946; /* Color del texto del encabezado */
+            color: #9b39e6; /* Color del texto del encabezado */
         }
 
         /* Estilo del canvas */
@@ -53,11 +53,22 @@
             border-radius: 5px; /* Bordes redondeados */
             cursor: pointer; /* Cursor de mano al pasar sobre el botón */
             margin: 5px; /* Espaciado alrededor de los botones */
+            font-size: 16px; /* Tamaño de fuente */
+            transition: background-color 0.3s, transform 0.3s; /* Transición suave */
         }
 
         /* Estilo del efecto hover en los botones */
         button:hover {
             background-color: #d62839; /* Color más oscuro al pasar el ratón */
+            transform: scale(1.05); /* Escala ligeramente el botón */
+        }
+
+        /* Contenedor para alinear los botones horizontalmente */
+        .botones-container {
+            display: flex; /* Flexbox para alinear horizontalmente */
+            justify-content: center; /* Centra los botones horizontalmente */
+            gap: 10px; /* Espaciado entre botones */
+            margin-bottom: 20px; /* Espaciado inferior */
         }
 
         /* Estilo del encabezado de transformaciones */
@@ -82,8 +93,11 @@
         <label for="lado">Dimensión de lado:</label>
         <input type="number" id="lado" value="50" min="1"><br>
 
-        <button onclick="trazarPoligono()">Trazar Polígono</button>
-        <button onclick="borrarCanvas()">Borrar</button><br><br>
+        <!-- Contenedor para los botones -->
+        <div class="botones-container">
+            <button onclick="trazarPoligono()">Trazar Polígono</button>
+            <button onclick="borrarCanvas()">Borrar</button>
+        </div>
 
         <h3>Transformaciones</h3>
         <label for="tx">Translación Tx:</label>
@@ -99,6 +113,7 @@
         <label for="angle">Rotación (en radianes):</label>
         <input type="number" id="angle" value="0" step="0.1"><br>
 
+        <!-- Botón para aplicar transformaciones -->
         <button onclick="aplicarTransformaciones()">Aplicar Transformaciones</button>
 
         <canvas id="canvas" width="600" height="600"></canvas>
@@ -183,4 +198,3 @@
     </script>
 </body>
 </html>
-
