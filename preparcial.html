@@ -5,45 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polígonos Regulares con Bordes Redondeados y Transformaciones</title>
     <style>
+        /* Estilo del cuerpo de la página */
         body {
-            background-color: black;
-            color: white;
-            text-align: center;
+            background-color: #333; /* Fondo oscuro */
+            color: #f0f0f0; /* Texto claro */
+            font-family: Arial, sans-serif; /* Fuente moderna */
+            text-align: center; /* Alineación centrada */
+            margin: 0;
+            padding: 20px;
         }
+
+        /* Estilo del encabezado */
+        h1 {
+            color: #e63946; /* Color del texto del encabezado */
+        }
+
+        /* Estilo del canvas */
         canvas {
-            background-color: white;
+            background-color: #fff; /* Fondo blanco */
+            border: 2px solid #e63946; /* Borde rojo */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
             margin-top: 20px;
+        }
+
+        /* Estilo de los elementos de etiqueta */
+        label {
+            display: block; /* Muestra las etiquetas en una nueva línea */
+            margin: 10px 0 5px; /* Espaciado alrededor de las etiquetas */
+        }
+
+        /* Estilo de los campos de entrada */
+        input[type="number"] {
+            padding: 8px; /* Relleno interno */
+            border: 1px solid #ddd; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+            background-color: #fff; /* Fondo blanco */
+            color: #333; /* Texto oscuro */
+        }
+
+        /* Estilo de los botones */
+        button {
+            background-color: #e63946; /* Fondo rojo */
+            color: #fff; /* Texto blanco */
+            border: none; /* Sin borde */
+            padding: 10px 20px; /* Relleno */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+            margin: 5px; /* Espaciado alrededor de los botones */
+        }
+
+        /* Estilo del efecto hover en los botones */
+        button:hover {
+            background-color: #d62839; /* Color más oscuro al pasar el ratón */
+        }
+
+        /* Estilo del encabezado de transformaciones */
+        h3 {
+            color: #f1faee; /* Color claro */
+            margin-top: 30px; /* Espaciado superior */
+        }
+
+        /* Estilo del contenedor principal */
+        .container {
+            max-width: 800px; /* Ancho máximo */
+            margin: 0 auto; /* Centrado horizontal */
         }
     </style>
 </head>
 <body>
-    <h1>Polígonos Regulares y Transformaciones</h1>
-    <label for="numLados">Número de lados:</label>
-    <input type="number" id="numLados" value="4" min="3"><br>
+    <div class="container">
+        <h1>Polígonos Regulares y Transformaciones</h1>
+        <label for="numLados">Número de lados:</label>
+        <input type="number" id="numLados" value="4" min="3"><br>
 
-    <label for="lado">Dimensión de lado:</label>
-    <input type="number" id="lado" value="50" min="1"><br>
+        <label for="lado">Dimensión de lado:</label>
+        <input type="number" id="lado" value="50" min="1"><br>
 
-    <button onclick="trazarPoligono()">Trazar Polígono</button>
-    <button onclick="borrarCanvas()">Borrar</button><br><br>
+        <button onclick="trazarPoligono()">Trazar Polígono</button>
+        <button onclick="borrarCanvas()">Borrar</button><br><br>
 
-    <h3>Transformaciones</h3>
-    <label for="tx">Translación Tx:</label>
-    <input type="number" id="tx" value="0"><br>
-    <label for="ty">Translación Ty:</label>
-    <input type="number" id="ty" value="0"><br>
+        <h3>Transformaciones</h3>
+        <label for="tx">Translación Tx:</label>
+        <input type="number" id="tx" value="0"><br>
+        <label for="ty">Translación Ty:</label>
+        <input type="number" id="ty" value="0"><br>
 
-    <label for="sx">Escalado Sx:</label>
-    <input type="number" id="sx" value="1" step="0.1"><br>
-    <label for="sy">Escalado Sy:</label>
-    <input type="number" id="sy" value="1" step="0.1"><br>
+        <label for="sx">Escalado Sx:</label>
+        <input type="number" id="sx" value="1" step="0.1"><br>
+        <label for="sy">Escalado Sy:</label>
+        <input type="number" id="sy" value="1" step="0.1"><br>
 
-    <label for="angle">Rotación (en radianes):</label>
-    <input type="number" id="angle" value="0" step="0.1"><br>
+        <label for="angle">Rotación (en radianes):</label>
+        <input type="number" id="angle" value="0" step="0.1"><br>
 
-    <button onclick="aplicarTransformaciones()">Aplicar Transformaciones</button>
+        <button onclick="aplicarTransformaciones()">Aplicar Transformaciones</button>
 
-    <canvas id="canvas" width="600" height="600"></canvas>
+        <canvas id="canvas" width="600" height="600"></canvas>
+    </div>
 
     <script>
         const canvas = document.getElementById('canvas');
@@ -56,7 +115,7 @@
             const numLados = parseInt(document.getElementById('numLados').value);
             const lado = parseInt(document.getElementById('lado').value);
             const radio = lado / (2 * Math.sin(Math.PI / numLados));
-            const radioCurvatura = lado * 0.1;  // Radio para redondear los bordes
+            const radioCurvatura = lado * 0.2;  // Ajusta el radio para bordes más redondeados
             centroX = canvas.width / 2;
             centroY = canvas.height / 2;
 
@@ -100,7 +159,7 @@
             const sx = parseFloat(document.getElementById('sx').value);
             const sy = parseFloat(document.getElementById('sy').value);
             const angle = parseFloat(document.getElementById('angle').value);
-            const radioCurvatura = parseInt(document.getElementById('lado').value) * 0.1;
+            const radioCurvatura = parseInt(document.getElementById('lado').value) * 0.2;  // Asegúrate de que el radioCurvatura coincida
 
             // Aplicar Traslación, Escalado y Rotación
             const verticesTransformados = vertices.map(v => {
@@ -124,3 +183,4 @@
     </script>
 </body>
 </html>
+
